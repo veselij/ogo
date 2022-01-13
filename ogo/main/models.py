@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 class BaseModel(models.Model):
@@ -28,6 +29,11 @@ class Country(models.Model):
     def __str__(self):
         return self.country
 
+    def save(self, *args, **kwargs):
+        """ Overide save method to lowercase country name. """
+        self.country = self.country.lower()
+        return super(Country, self).save(*args, **kwargs)
+
 
 class PurchasedTrip(BaseModel):
     """ Model for trips purchased by customers. """
@@ -44,13 +50,18 @@ class PurchasedTrip(BaseModel):
 
 
 class Trip(BaseModel):
+    
+    class Meta:
+        ordering = ('-id', )
+
     name = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, help_text='Страна путевки')
     price = models.FloatField(help_text='Цена')
-    description = models.TextField(help_text='Описание предложения')
+    description = models.TextField(help_text='Корткое описание предложения')
+    full_description = models.TextField(help_text='Полное описание')
 
     def __str__(self):
-        return self.description
+        return self.name
 
 def trip_path(instance, filename):
     return f'{instance.trip.name}/{filename}'
@@ -59,3 +70,16 @@ class Picture(BaseModel):
     """ Model for storing images for trips. """
     pictrure = models.ImageField(upload_to=trip_path)
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, help_text='Путевка')
+    front_picture = models.BooleanField(default=False, help_text='Главная картинка')
+
+    def save(self, *args, **kwargs):
+        super(Picture, self).save(*args, **kwargs)
+        img = Image.open(self.pictrure.path)
+        if img.width > 1200 or img.height > 1200:
+            output_size = (1200, 1200)
+            img.thumbnail(output_size)
+            img.save(self.pictrure.path)
+
+    def __str__(self):
+        return self.trip.name
+
