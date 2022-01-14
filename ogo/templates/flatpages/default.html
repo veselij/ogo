@@ -1,0 +1,9 @@
+{% extends '../main/base.html' %}
+{% load thumbnail %}
+{% block title %}
+        <title>{{ flatpage.title }}</title>
+        <meta name="description" content="Турагенство Ого как мы работаем по продаже турпутевок">
+{% endblock title %}
+{% block content %}
+{{ flatpage.content }}
+{% endblock %}

@@ -27,8 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 
     'sorl.thumbnail',
+    'crispy_forms',
+    'crispy_bootstrap5',
 
     'main',
 ]
@@ -106,7 +109,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+SITE_ID = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -115,6 +118,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 THUMBNAIL_PREFIX = 'media/cache/'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

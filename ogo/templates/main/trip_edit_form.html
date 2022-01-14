@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div style="padding-top: 120px;">
+<form enctype="multipart/form-data" method="post">{% csrf_token %}
+    {{ form|crispy }}
+    {{ formset|crispy }}
+    <input type="submit" value="Обновить">
+</form>
+</div>
+{% endblock %}

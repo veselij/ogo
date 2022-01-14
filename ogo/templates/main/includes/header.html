@@ -1,6 +1,6 @@
 {% load static %}
 <header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
         <img src="{% static 'logo.png' %}" alt="" width="80" height="80" class="d-inline-block">
@@ -14,16 +14,27 @@
           <a class="nav-link active" aria-current="page" href="/">Предложения</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Как мы работаем</a>
+          <a class="nav-link" href="/about">Как мы работаем</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Контакты</a>
+          <a class="nav-link" href="/contacts">Контакты</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/trip/add">Добавить тур</a>
+        </li>
+        {% endif %}
       </ul>
-      <form class="d-flex">
-        <input name="search_query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-warning" type="submit">Поиск по стране</button>
-      </form>
+      <div class="dropdown" style="padding-right: 1%">
+  <a class="btn btn-warning dropdown-toggle" href="/" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Страны
+  </a>
+  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+      {% for country in countries %}
+      <li><a class="dropdown-item" href="/?search_query={{country}}">{{country}}</a></li>
+      {% endfor %}
+  </ul>
+</div>
     </div>
   </div>
 </nav>

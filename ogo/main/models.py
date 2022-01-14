@@ -29,11 +29,6 @@ class Country(models.Model):
     def __str__(self):
         return self.country
 
-    def save(self, *args, **kwargs):
-        """ Overide save method to lowercase country name. """
-        self.country = self.country.lower()
-        return super(Country, self).save(*args, **kwargs)
-
 
 class PurchasedTrip(BaseModel):
     """ Model for trips purchased by customers. """
@@ -63,22 +58,26 @@ class Trip(BaseModel):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('trip_detail', kwargs={'pk' : self.pk})
+
 def trip_path(instance, filename):
     return f'{instance.trip.name}/{filename}'
 
 class Picture(BaseModel):
     """ Model for storing images for trips. """
-    pictrure = models.ImageField(upload_to=trip_path)
+    picture = models.ImageField(upload_to=trip_path)
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, help_text='Путевка')
     front_picture = models.BooleanField(default=False, help_text='Главная картинка')
 
     def save(self, *args, **kwargs):
         super(Picture, self).save(*args, **kwargs)
-        img = Image.open(self.pictrure.path)
+        img = Image.open(self.picture.path)
         if img.width > 1200 or img.height > 1200:
             output_size = (1200, 1200)
             img.thumbnail(output_size)
-            img.save(self.pictrure.path)
+            img.save(self.picture.path)
 
     def __str__(self):
         return self.trip.name

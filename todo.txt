@@ -1,0 +1,6 @@
+5. Buy domain name
+6. Find and rent virtual server
+7. Setup nginx and gunicorn
+8. Fill site data
+9. Add Yandex and google metrics
+10. Start marketing compain in Yandex
