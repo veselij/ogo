@@ -10,6 +10,9 @@
 {% else %}
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-top: 120px;">
 {% endif %}
+<div style="flex-wrap: wrap;padding-top: 10px; padding-left: 10px;padding-right: 10px;padding-bottom: 10px;text-align: justify;">
+    <p>У нас нет привычного поиска по турам, так как мы решили сэкономить Ваше время. Так как вы все эти системы как правило не показывают доступность тура и в конечном счете после утомительного поиска, клиенты переходят на "живое" общение с менеджером. Дак почему бы сразу не написать нам <a href="https://wa.me/{{ seller.mobile_phone_number }}">в WhatsApp</a> мы подберем Вам тур по вашим критериям. Или можете посмотреть одно из направлений ниже и дать нам знать, что Вам понравилось.</p>
+</div>
   {% for trip in trip_list %}
     {% if mobile %}
       <div class="card" style="margin: 1%">
@@ -35,7 +38,7 @@
       </div>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">{{ trip.description }}</p>
       <a href="/trip/{{trip.id}}" class="btn btn-dark">Подробнее</a>
-      <a href="https://wa.me/79258497890?text=Меня заинтересовал отель {{trip.name}}" class="btn btn-warning">WhatsApp</a>
+      <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Меня заинтересовал отель {{trip.name}}" class="btn btn-warning">WhatsApp</a>
           {% if user.is_authenticated %}
           <a href="/trip/{{trip.id}}/edit" class="btn btn-danger">Изменить</a>
           {% endif %}

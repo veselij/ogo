@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main.models import Trip, Country
+from main.models import Trip, Country, Seller
 from main.forms import TripForm, ImageFormset
 
 
@@ -13,6 +13,7 @@ class CountryMixin(object):
         """ Overiding defautl method to get also list of countries """
         context = super(CountryMixin, self).get_context_data(**kwargs)
         context['countries'] = Country.objects.all()
+        context['seller'] = Seller.objects.first()
         return context
 
 

@@ -13,6 +13,15 @@ class BaseModel(models.Model):
     updated = models.DateTimeField(auto_now=True, help_text='Дата изменения')
 
 
+class Seller(models.Model):
+    """ Sales manager. """
+    user = models.OneToOneField(User, on_delete=models.CASCADE, help_text='Менеджер по продажам')
+    mobile_phone_number = models.CharField(max_length=11, help_text='в формате 7ХХХХХХХХХХ')
+
+    def __str__(self) -> str:
+        return self.user.username
+
+
 class Customer(models.Model):
     """ Customer class extends django User. """
     user = models.OneToOneField(User, on_delete=models.CASCADE, help_text='Клиент')

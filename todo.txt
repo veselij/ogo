@@ -1,6 +1,6 @@
-5. Buy domain name
-6. Find and rent virtual server
-7. Setup nginx and gunicorn
-8. Fill site data
-9. Add Yandex and google metrics
-10. Start marketing compain in Yandex
+Find and rent virtual server
+Setup nginx and gunicorn
+Start filling the site data
+Buy domain name
+Add Yandex or google metrics
+Start marketing compain in Yandex or google
