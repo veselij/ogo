@@ -8,10 +8,10 @@ class StaticSiteMap(sitemaps.Sitemap):
     priority = 0.5
     changefreq = 'daily'
 
-    def items(self) -> list[str]:
+    def items(self):
         return ['main', 'about', 'contacts']
 
-    def location(self, obj: str) -> str:
+    def location(self, obj: str):
         return reverse(obj)
 
 
