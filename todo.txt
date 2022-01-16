@@ -2,3 +2,8 @@ Setup nginx and gunicorn
 Start filling the site data
 Add Yandex or google metrics
 Start marketing compain in Yandex or google
+
+Optional:
+    Added errors handling and notification
+    Added cache
+    Added tests
