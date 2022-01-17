@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="text-wrap"  style="text-align: left;padding-top: 100px; ">
-    <div class="bg-white p-4 rounded-lg m-1" style="padding-left: 30px;padding-right: 30px">
+    <div class="bg-light p-4 rounded-lg m-1" style="padding-left: 30px;padding-right: 30px">
         <h1 class="display-6">Контакты:</h1>
             <ul>
                 <li><a href="https://wa.me/{{seller.mobile_phone_number }}">WhatsApp<a/></li>
@@ -22,4 +22,10 @@
     </div>
 </div>
 
+        <script>
+           $(document).ready(function(){
+           $(".active").removeClass("active");
+           $("#contacts").addClass("active");
+});
+        </script>
 {% endblock %}

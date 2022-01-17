@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% load thumbnail %}
 {% block title %}
     <title>Ogo Турагенство путешествий</title>
@@ -6,25 +7,44 @@
 {% endblock title %}
 {% block content %}
 {% if mobile %}
-<div style="display: flex; flex-direction: column; flex-wrap: wrap; padding-top: 110px">
+<div style="display: flex; flex-direction: column; flex-wrap: wrap; padding-top: 90px">
+<div class="w-auto" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
+<h1 class="display-6 p-5 text-white" style="text-align: center">У нас нет привычного поиска тура</h1>
 {% else %}
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-top: 110px;">
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-top: 90px;">
+<div class="w-auto" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm_desktop.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
+<h1 class="display-6 ps-5 pe-5 pb-5 text-white" style="text-align: center; padding-top: 8rem;">У нас нет привычного поиска тура</h1>
 {% endif %}
-
-<div class="bg-light p-4 rounded-lg m-1" style="flex-wrap: wrap;text-align: justify;">
-    <h1 class="display-6" style="text-align: center">У нас нет привычного поиска тура</h1>
-    <p class="lead">Так как мы решили сэкономить Ваше время. Все эти системы, как правило, не показывают доступность отеля и в конечном счете после утомительного поиска, клиенты переходят на "живое" общение с менеджером. Так почему бы сразу не написать нам в <a href="https://wa.me/{{ seller.mobile_phone_number }}">WhatsApp</a> и мы оперативно подберем Вам идеальный тур. Рекомендуем также посмотреть одно из направлений ниже и дать нам знать, что Вам понравилось.</p>
+    <p class="lead text-white ps-5 pe-5" id="start">Мы сэкономили Ваше время. После утомительного поиска на других сайтах, клиенты приходят к нам на за "живым общением". Рекомендуем посмотреть одно из направлений ниже и дать нам знать, что Вам понравилось или просто написать нам <a href="https://wa.me/{{ seller.mobile_phone_number }}">WhatsApp</a>.</p>
 </div>
+
+  <div class="w-100 text-center p-3 d-flex justify-content-center" >
+      <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group me-2">
+          <select class="form-select w-auto" aria-label="Default select example" id="selectcountry">
+              <option value="" selected>Выберете страну</option>
+              {% for country in countries %}
+                  <option value="{{country}}">{{country}}</option>
+              {% endfor %}
+          </select>
+          </div>
+          <div class="btn-group me-2">
+          <button type="button" class="btn btn-dark" id="search">Найти</button>
+          </div>
+    </div>
+  </div>
+
+
   {% for trip in trip_list %}
     {% if mobile %}
-      <div class="card" style="margin: 0.1%">
+      <div class="card bg-light mb-3 border border-0 rounded-0 " style="margin: 2%">
     {% else %}
-      <div class="card" style="width: 16%; margin: 0.1%">
+      <div class="card bg-light mb-3 border border-0 rounded-0 " style="width: 19%; margin: 0.5%">
     {% endif %}
 {% for pic in trip.picture_set.all %}
     {% if pic.front_picture %}
     {% thumbnail trip.picture_set.all.0.picture "300x300" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="card-img-top">
+    <a href="/trip/{{trip.id}}"><img  src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="card-img-top"></a>
     {% endthumbnail %}
     {% endif %}
 {% endfor %}
@@ -45,4 +65,15 @@
   <div style="flex-wrap: wrap;padding-top: 10px; padding-left: 10px;padding-right: 10px;padding-bottom: 10px">
   <p>* Цены актуальны на момент публикации. Детали уточняйте у менеджера.</p>
   </div>
+        <script>
+           $(document).ready(function(){
+           $(".active").removeClass("active");
+           $("#index").addClass("active");
+            });
+
+        $('#search').on('click', function() {
+              var text = $('#selectcountry').val();
+              window.location = "/?search_query=" + text +"#start";  
+})
+        </script>
 {% endblock %}

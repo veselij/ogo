@@ -6,29 +6,23 @@
 {% block content %}
 
 <div class="text-wrap"  style="text-align: left;padding-top: 100px; ">
-<div class="bg-white p-4 rounded-lg m-1" style="text-align: justify;padding-top: 120px; padding-left: 30px;padding-right: 30px;padding-bottom: 50px;">
+<div class="bg-light p-4 rounded-lg m-1" style="text-align: justify;padding-top: 120px; padding-left: 30px;padding-right: 30px;padding-bottom: 50px;">
 <h1 class="display-6">Как мы работаем</h1>
 <p>Наша фирма <a href="/">ОГО</a> осуществляет свою туристическую деятельность более 6 лет.</p>
 <p>Мы работаем только с крупными и проверенными туроператорами:</p>
 <ul>
-<li>TUI</li>
-<li>Sunmar</li>
-<li>Anex</li>
-<li>Pegas</li>
-<li>ICS Travel Group</li>
-<li>Интурист</li>
-<li>Библио-Глобус</li>
-<li>Русский Экспресс </li>
+    <li><a href="https://fstravel.com">TUI</a></li>
+    <li><a href="https://www.sunmar.ru/">Sunmar</a></li>
+    <li><a href="https://anxtour.ru/">Anex</a></li>
+    <li><a href="https://pegast.ru">Pegas</a></li>
+    <li><a href="https://www.icstrvl.ru">ICS Travel Group</a></li>
+    <li><a href="https://intourist.ru">Интурист</a></li>
+    <li><a href="https://www.bgoperator.ru">Библио-Глобус</a></li>
+    <li><a href="https://r-express.ru">Русский Экспресс</a></li>
 </ul>
 
 <p>Мы работаем как в формате онлайн, так и в офисе.</p>
-<p>Присылаете свои пожелания удобным для Вас способом:</p>
-<ul>
-    <li><a href="https://wa.me/{{seller.mobile_phone_number }}">WhatsApp<a/></li>
-    <li><a href="mailto:{{seller.user.email}}">email</a></li>
-    <li>по телефону +{{seller.mobile_phone_number }} {{seller.user.first_name}}</li>
-</ul>
-
+<p>Присылаете свои пожелания удобным для Вас способом <a href="/contacts">Контакты</a></p>
 <p>Мы подбираем для Вас тур по Вашим индивидуальным критериям.</p>
 <p>Все обсуждаем и согласовываем с Вами, бронируем Вам путевку (Тур бронируем по предоплате 10% от выбранного Вами предложения).</p>
 <p>Заключаем договор на оказание услуг и формируем платежные поручения.</p>
@@ -36,5 +30,12 @@
 <p>Готовые документы можем отправить Вам на почту или отдать при личной встрече, согласовав предварительно удобное для вас место и время.</p>
 </div>
 </div>
+
+        <script>
+           $(document).ready(function(){
+           $(".active").removeClass("active");
+           $("#howwework").addClass("active");
+});
+        </script>
 
 {% endblock %}
