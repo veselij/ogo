@@ -15,7 +15,7 @@
 <div class="w-100" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm_desktop.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
 <h1 class="display-6 ps-5 pe-5 pb-5 text-white" style="text-align: center; padding-top: 8rem;">У нас нет привычного поиска тура</h1>
 {% endif %}
-    <p class="lead text-white ps-5 pe-5" >После утомительного поиска на сайтах, клиенты приходят к нам за "живым общением". Посмотрите одно из направлений и напишите.</p>
+    <p class="lead text-white ps-5 pe-5" style="text-align: center">После утомительного поиска на сайтах, клиенты приходят к нам за "живым общением". Посмотрите одно из направлений и напишите.</p>
 
   {% if mobile %}
   <div class="w-100 text-center p-3 d-flex justify-content-center" >
@@ -58,7 +58,7 @@
     {% if mobile %}
       <div class="card mb-3 border border-0 rounded-0 " style="margin: 4%; background-color: #E8E8E8" id="start">
     {% else %}
-      <div class="card mb-3 border border-0 rounded-0 " style="width: 19%; margin: 0.5%; background-color: #E8E8E8" id="start">
+      <div class="card mb-3 border border-0 rounded-0 mx-auto" style="width: 250px; background-color: #E8E8E8" id="start">
     {% endif %}
 {% for pic in trip.picture_set.all %}
     {% if pic.front_picture %}
