@@ -12,34 +12,53 @@
 <h1 class="display-6 p-5 text-white" style="text-align: center">У нас нет привычного поиска тура</h1>
 {% else %}
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-top: 90px;">
-<div class="w-auto" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm_desktop.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
+<div class="w-100" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm_desktop.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
 <h1 class="display-6 ps-5 pe-5 pb-5 text-white" style="text-align: center; padding-top: 8rem;">У нас нет привычного поиска тура</h1>
 {% endif %}
-    <p class="lead text-white ps-5 pe-5" id="start">Мы сэкономили Ваше время. После утомительного поиска на других сайтах, клиенты приходят к нам на за "живым общением". Рекомендуем посмотреть одно из направлений ниже и дать нам знать, что Вам понравилось или просто написать нам <a href="https://wa.me/{{ seller.mobile_phone_number }}">WhatsApp</a>.</p>
-</div>
+    <p class="lead text-white ps-5 pe-5" >После утомительного поиска на сайтах, клиенты приходят к нам за "живым общением". Посмотрите одно из направлений и напишите.</p>
+
+  {% if mobile %}
+  <div class="w-100 text-center p-3 d-flex justify-content-center" >
+          <select class="form-select w-auto" aria-label="Default select example" id="selectcountry" onchange="getComboA(this)">
+              <option value="" selected>Выберете Страну</option>
+              {% for country in countries %}
+                  <option value="{{country}}">{{country}}</option>
+              {% endfor %}
+          </select>
+    </div>
+  <div class="w-100 text-center p-3 d-flex justify-content-center" >
+          <button type="button" class="btn btn-dark" id="search">Горячи предложения</button>
+    </div>
+  <div class="w-100 text-center p-3 d-flex justify-content-center" >
+          <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Хочу купить тур в " id="link" class="btn btn-warning">Написать WhatsApp</a>
+    </div>
+  {% else %}
 
   <div class="w-100 text-center p-3 d-flex justify-content-center" >
       <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
           <div class="btn-group me-2">
-          <select class="form-select w-auto" aria-label="Default select example" id="selectcountry">
-              <option value="" selected>Выберете страну</option>
+          <select class="form-select w-auto" aria-label="Default select example" id="selectcountry" onchange="getComboA(this)">
+              <option value="" selected>Выберете Страну</option>
               {% for country in countries %}
                   <option value="{{country}}">{{country}}</option>
               {% endfor %}
           </select>
           </div>
           <div class="btn-group me-2">
-          <button type="button" class="btn btn-dark" id="search">Найти</button>
+          <button type="button" class="btn btn-dark" id="search">Горячи предложения</button>
+          </div>
+          <div class="btn-group me-2">
+          <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Хочу купить тур в " id="link" class="btn btn-warning">Написать WhatsApp</a>
           </div>
     </div>
   </div>
-
-
+    {% endif %}
+</div>
   {% for trip in trip_list %}
     {% if mobile %}
-      <div class="card bg-light mb-3 border border-0 rounded-0 " style="margin: 2%">
+      <div class="card mb-3 border border-0 rounded-0 " style="margin: 4%; background-color: #E8E8E8" id="start">
     {% else %}
-      <div class="card bg-light mb-3 border border-0 rounded-0 " style="width: 19%; margin: 0.5%">
+      <div class="card mb-3 border border-0 rounded-0 " style="width: 19%; margin: 0.5%; background-color: #E8E8E8" id="start">
     {% endif %}
 {% for pic in trip.picture_set.all %}
     {% if pic.front_picture %}
@@ -74,6 +93,14 @@
         $('#search').on('click', function() {
               var text = $('#selectcountry').val();
               window.location = "/?search_query=" + text +"#start";  
-})
+});
+            function getComboA(selectObject) {
+              var value = selectObject.value;  
+                            console.log(value);
+              var link = document.getElementById("link");
+              var old_link = link.getAttribute('href');
+              var new_link = old_link + value;
+              link.setAttribute('href', new_link);
+}
         </script>
 {% endblock %}
