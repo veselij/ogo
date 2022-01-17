@@ -62,7 +62,7 @@
     {% endif %}
 {% for pic in trip.picture_set.all %}
     {% if pic.front_picture %}
-    {% thumbnail trip.picture_set.all.0.picture "300x300" crop="center" as im %}
+    {% thumbnail pic.picture "300x300" crop="center" as im %}
     <a href="/trip/{{trip.id}}"><img  src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="card-img-top"></a>
     {% endthumbnail %}
     {% endif %}
