@@ -29,7 +29,7 @@ class TripListView(CountryMixin, ListView):
     """ View of all trips as table. """
     model = Trip
     context_object_name = 'trip_list'
-    paginate_by = 2
+    paginate_by = 20
 
     def get_queryset(self):
         """ Overrode method to filter by country name if search_query provided in request """

@@ -7,11 +7,11 @@
 {% endblock title %}
 {% block content %}
 {% if mobile %}
-<div style="display: flex; flex-direction: column; flex-wrap: wrap; padding-top: 90px">
+<div style="display: flex; flex-direction: column; flex-wrap: wrap; padding-top: 40px">
 <div class="w-auto" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
 <h1 class="display-6 p-5 text-white" style="text-align: center">У нас нет привычного поиска тура</h1>
 {% else %}
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-top: 90px;">
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-top: 40px;">
 <div class="w-100" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm_desktop.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
 <h1 class="display-6 ps-5 pe-5 pb-5 text-white" style="text-align: center; padding-top: 8rem;">У нас нет привычного поиска тура</h1>
 {% endif %}
@@ -81,6 +81,7 @@
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🏖 {{ trip.beach }}</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🥘 {{ trip.meal_type }}</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">⛺ {{ trip.room_type }}</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">💰 От {{ trip.price |floatformat:"0"}}</p>
       <a href="/trip/{{trip.id}}" class="btn btn-dark">Подробнее</a>
       <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Меня заинтересовал отель {{trip.name}}" class="btn btn-warning">WhatsApp</a>
           {% if user.is_authenticated %}
