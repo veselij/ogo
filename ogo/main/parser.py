@@ -44,8 +44,12 @@ def process_tours():
             data = json.load(f)
             tours = data['results']
             for tour in tours:
-                hotel = Hotel(tour['hotel']['name'].strip(), tour['shortLocationCardInfo'].strip(), tour['beachCardInfo'].strip(), tour['images'], tour['hotel']['description'].strip(), tour['cheapestOffer']['startDate'], tour['cheapestOffer']['duration'], tour['cheapestOffer']['mealTypeName'].strip(), tour['cheapestOffer']['price'], tour['cheapestOffer']['roomTypeName'].strip(), tour['hotel']['stars'], tour['hotel']['coords']['lat'], tour['hotel']['coords']['lon'])
-                hotels.append(hotel)
+                try:
+                    hotel = Hotel(tour['hotel']['name'].strip(), tour['shortLocationCardInfo'].strip(), tour['beachCardInfo'].strip(), tour['images'], tour['hotel']['description'].strip(), tour['cheapestOffer']['startDate'], tour['cheapestOffer']['duration'], tour['cheapestOffer']['mealTypeName'].strip(), tour['cheapestOffer']['price'], tour['cheapestOffer']['roomTypeName'].strip(), tour['hotel']['stars'], tour['hotel']['coords']['lat'], tour['hotel']['coords']['lon'])
+                    hotels.append(hotel)
+                except Exception as e:
+                    print(e)
+                    pass
     return hotels
 
 def download_image(url, name):

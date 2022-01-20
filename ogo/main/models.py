@@ -73,8 +73,8 @@ class Trip(BaseModel):
     duration = models.IntegerField(help_text='Длительность тура')
     meal_type = models.CharField(max_length=255, default='', help_text='Тип питания')
     stars = models.IntegerField(default=-1, help_text='Звезды')
-    lat = models.FloatField(default=0, help_text='latitude')
-    long = models.FloatField(default=0, help_text='longitude')
+    lat = models.FloatField(default=0, null=True, help_text='latitude')
+    long = models.FloatField(default=0, null=True, help_text='longitude')
     room_type = models.CharField(max_length=255, default='', help_text='Тип номера')
 
     def __str__(self):
