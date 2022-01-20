@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
 
 
 class BaseModel(models.Model):
@@ -38,6 +37,13 @@ class Country(models.Model):
     def __str__(self):
         return self.country
 
+class Resort(models.Model):
+    """ Model for resort region. """
+    resort = models.CharField(max_length=100, help_text='Курорт')
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.resort
 
 class PurchasedTrip(BaseModel):
     """ Model for trips purchased by customers. """
@@ -59,10 +65,17 @@ class Trip(BaseModel):
         ordering = ('-id', )
 
     name = models.CharField(max_length=100)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, help_text='Страна путевки')
     price = models.FloatField(help_text='Цена')
     description = models.TextField(help_text='Корткое описание предложения')
-    full_description = models.TextField(help_text='Полное описание')
+    resort = models.ForeignKey(Resort, on_delete=models.CASCADE, help_text='Курорт')
+    beach = models.CharField(max_length=255, default='', help_text='Пляжная линия')
+    start_date = models.DateField(help_text='Дата заезда')
+    duration = models.IntegerField(help_text='Длительность тура')
+    meal_type = models.CharField(max_length=255, default='', help_text='Тип питания')
+    stars = models.IntegerField(default=-1, help_text='Звезды')
+    lat = models.FloatField(default=0, help_text='latitude')
+    long = models.FloatField(default=0, help_text='longitude')
+    room_type = models.CharField(max_length=255, default='', help_text='Тип номера')
 
     def __str__(self):
         return self.name
@@ -76,17 +89,9 @@ def trip_path(instance, filename):
 
 class Picture(BaseModel):
     """ Model for storing images for trips. """
-    picture = models.ImageField(upload_to=trip_path)
+    picture = models.ImageField(upload_to=trip_path, blank=True)
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, help_text='Путевка')
     front_picture = models.BooleanField(default=False, help_text='Главная картинка')
-
-    def save(self, *args, **kwargs):
-        super(Picture, self).save(*args, **kwargs)
-        img = Image.open(self.picture.path)
-        if img.width > 1200 or img.height > 1200:
-            output_size = (1200, 1200)
-            img.thumbnail(output_size)
-            img.save(self.picture.path)
 
     def __str__(self):
         return self.trip.name

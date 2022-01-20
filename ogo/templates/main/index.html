@@ -69,9 +69,18 @@
 {% endfor %}
     <div class="card-body">
       <div style="display: flex; flex-direction: row">
-        <h5 class="card-title">{{ trip.name }}</h5>
+          {% if trip.stars > 2 %}
+              <h5 class="card-title">{{ trip.name }} {{ trip.stars }}*</h5>
+          {% else %}
+              <h5 class="card-title">{{ trip.name }}</h5>
+          {% endif %}
       </div>
-      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">{{ trip.description }}</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🏨 {{ trip.resort.country }}, {{ trip.resort }}</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">📆 C {{ trip.start_date }} на {{ trip.duration }} ночей</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">👥 На двоих</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🏖 {{ trip.beach }}</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🥘 {{ trip.meal_type }}</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">⛺ {{ trip.room_type }}</p>
       <a href="/trip/{{trip.id}}" class="btn btn-dark">Подробнее</a>
       <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Меня заинтересовал отель {{trip.name}}" class="btn btn-warning">WhatsApp</a>
           {% if user.is_authenticated %}
@@ -84,9 +93,26 @@
   <div style="flex-wrap: wrap;padding-top: 10px; padding-left: 10px;padding-right: 10px;padding-bottom: 10px">
   <p>* Цены актуальны на момент публикации. Детали уточняйте у менеджера.</p>
   </div>
+<nav aria-label="Page navigation tours" style="padding-bottom:100px;">
+  <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link text-dark" href="?page={{ page_obj.previous_page_number }}">Пред</a></li>
+        {% endif %}
+        {% for page_number in paginator.page_range %}
+            {% if page_number == page_obj.number %}
+                <li class="page-item active"><a class="page-link bg-dark dark border-dark" href="?page={{ page_number }}#start">{{ page_number }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link text-dark"href="?page={{ page_number }}#start">{{ page_number }}</a></li>
+            {% endif%}
+        {% endfor%}
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link text-dark"href="?page={{ page_obj.next_page_number }}">След</a></li>
+        {% endif %}
+  </ul>
+</nav>
         <script>
            $(document).ready(function(){
-           $(".active").removeClass("active");
+           $(".nav-link .active").removeClass("active");
            $("#index").addClass("active");
             });
 

@@ -1,22 +1,5 @@
-<footer class="text-center text-lg-start text-muted bg-dark">
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-        {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
-        {% endif %}
-        {% for page_number in paginator.page_range %}
-            {% if page_number == page_obj.number %}
-                <li class="page-item active"><a class="page-link"href="?page={{ page_number }}">{{ page_number }}</a></li>
-            {% else %}
-                <li class="page-item"><a class="page-link"href="?page={{ page_number }}">{{ page_number }}</a></li>
-            {% endif%}
-        {% endfor%}
-        {% if page_obj.has_next %}
-        <li class="page-item"><a class="page-link"href="?page={{ page_obj.next_page_number }}">next</a></li>
-        {% endif %}
-  </ul>
-</nav>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+<nav class="navbar fixed-bottom navbar-dark bg-dark justify-content-center">
+    <p class="text-center p-2 text-muted text-white">
     Ogo © {% now "Y" %} Copyright
-    </div>
-</footer>
+    </p>
+</nav>
