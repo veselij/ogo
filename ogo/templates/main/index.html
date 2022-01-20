@@ -76,7 +76,7 @@
           {% endif %}
       </div>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🏨 {{ trip.resort.country }}, {{ trip.resort }}</p>
-      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">📆 C {{ trip.start_date }} на {{ trip.duration }} ночей</p>
+      <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">📆 C {{ trip.start_date|date:"d.m.Y" }} на {{ trip.duration }} ночей</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">👥 На двоих</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🏖 {{ trip.beach }}</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🥘 {{ trip.meal_type }}</p>

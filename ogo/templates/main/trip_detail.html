@@ -60,7 +60,7 @@
     <div class="col-12 col-md-4">
         <h1>{{ object.name }}</h1>
       <p style="word-wrap: normal;white-space:pre-wrap">🏨 {{ object.resort.country }}, {{ object.resort }}</p>
-      <p style="word-wrap: normal;white-space:pre-wrap">📆 Заезд {{ object.start_date }}</p>
+      <p style="word-wrap: normal;white-space:pre-wrap">📆 Заезд {{ object.start_date|date:"d.m.Y" }}</p>
       <p style="word-wrap: normal;white-space:pre-wrap">🌙 {{ object.duration }} ночей</p>
       <p style="word-wrap: normal;white-space:pre-wrap">👥 На двоих</p>
       <p style="word-wrap: normal;white-space:pre-wrap">🏖 {{ object.beach }}</p>
