@@ -85,7 +85,7 @@
       <a href="{{trip.get_absolute_url}}" class="btn btn-dark">Подробнее</a>
       <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Меня заинтересовал отель {{trip.name}} в {{trip.resort.country}} {{trip.resort}}" class="btn btn-warning">WhatsApp</a>
           {% if user.is_authenticated %}
-          <a href="/trip/{{trip.id}}/edit" class="btn btn-danger">Изменить</a>
+          <a href="{{trip.get_absolute_url}}/edit" class="btn btn-danger">Изменить</a>
           {% endif %}
     </div>
   </div>

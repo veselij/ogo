@@ -9,7 +9,7 @@ urlpatterns = [
         path('contacts/', ContactTeplateView.as_view(), name='contacts'),
         path('trip/<slug:slug>/', TripDetailView.as_view(), name='trip_detail'),
         path('trip/add/', TripCreateView.as_view(), name='trip_add'),
-        path('trip/<pk:int>/edit/', TripUpdateView.as_view(), name='trip_edit'),
+        path('trip/<slug:slug>/edit/', TripUpdateView.as_view(), name='trip_edit'),
         ]
 
 if settings.DEBUG:
