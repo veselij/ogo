@@ -7,9 +7,9 @@ urlpatterns = [
         path('', TripListView.as_view(template_name='main/index.html'), name='main'),
         path('about/', AboutTemplateView.as_view(), name='about'),
         path('contacts/', ContactTeplateView.as_view(), name='contacts'),
-        path('trip/<int:pk>/', TripDetailView.as_view(), name='trip_detail'),
+        path('trip/<slug:slug>/', TripDetailView.as_view(), name='trip_detail'),
         path('trip/add/', TripCreateView.as_view(), name='trip_add'),
-        path('trip/<int:pk>/edit/', TripUpdateView.as_view(), name='trip_edit'),
+        path('trip/<pk:int>/edit/', TripUpdateView.as_view(), name='trip_edit'),
         ]
 
 if settings.DEBUG:

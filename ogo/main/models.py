@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 
 class BaseModel(models.Model):
@@ -76,13 +77,19 @@ class Trip(BaseModel):
     lat = models.FloatField(default=0, null=True, help_text='latitude')
     long = models.FloatField(default=0, null=True, help_text='longitude')
     room_type = models.CharField(max_length=255, default='', help_text='Тип номера')
+    slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('trip_detail', kwargs={'pk' : self.pk})
+        return reverse('trip_detail', kwargs={'slug' : self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 def trip_path(instance, filename):
     return f'{instance.trip.name}/{filename}'

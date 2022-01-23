@@ -15,7 +15,7 @@
 <div class="w-100" style="height: 600px; background:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url({% static 'palm_desktop.jpg' %});background-size: 100% 100%; flex-wrap: wrap;text-align: justify;">
 <h1 class="display-6 ps-5 pe-5 pb-5 text-white" style="text-align: center; padding-top: 8rem;">У нас нет привычного поиска тура</h1>
 {% endif %}
-    <p class="lead text-white ps-5 pe-5" style="text-align: center">После утомительного поиска на сайтах, клиенты приходят к нам за "живым общением". Посмотрите одно из направлений и напишите.</p>
+    <p class="lead text-white ps-5 pe-5" style="text-align: center">После утомительного поиска на сайтах, клиенты приходят к нам за "живым общением". Посмотрите одно из горячих предложений и напишите нам.</p>
 
   {% if mobile %}
   <div class="w-100 text-center p-3 d-flex justify-content-center" >
@@ -27,7 +27,7 @@
           </select>
     </div>
   <div class="w-100 text-center p-3 d-flex justify-content-center" >
-          <button type="button" class="btn btn-dark" id="search">Горячи предложения</button>
+          <button type="button" class="btn btn-dark" id="search">Найти горячий тур</button>
     </div>
   <div class="w-100 text-center p-3 d-flex justify-content-center" >
           <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Хочу купить тур в " id="link" class="btn btn-warning">Написать WhatsApp</a>
@@ -45,7 +45,7 @@
           </select>
           </div>
           <div class="btn-group me-2">
-          <button type="button" class="btn btn-dark" id="search">Горячи предложения</button>
+          <button type="button" class="btn btn-dark" id="search">Найти горячий тур</button>
           </div>
           <div class="btn-group me-2">
           <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Хочу купить тур в " id="link" class="btn btn-warning">Написать WhatsApp</a>
@@ -63,7 +63,7 @@
 {% for pic in trip.picture_set.all %}
     {% if pic.front_picture %}
     {% thumbnail pic.picture "300x300" crop="center" as im %}
-    <a href="/trip/{{trip.id}}"><img  src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="card-img-top"></a>
+    <a href="{{trip.get_absolute_url}}"><img  src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="card-img-top"></a>
     {% endthumbnail %}
     {% endif %}
 {% endfor %}
@@ -82,8 +82,8 @@
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">🥘 {{ trip.meal_type }}</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">⛺ {{ trip.room_type }}</p>
       <p class="card-text" style="word-wrap: normal;white-space:pre-wrap">💰 От {{ trip.price |floatformat:"0"}}</p>
-      <a href="/trip/{{trip.id}}" class="btn btn-dark">Подробнее</a>
-      <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Меня заинтересовал отель {{trip.name}}" class="btn btn-warning">WhatsApp</a>
+      <a href="{{trip.get_absolute_url}}" class="btn btn-dark">Подробнее</a>
+      <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Меня заинтересовал отель {{trip.name}} в {{trip.resort.country}} {{trip.resort}}" class="btn btn-warning">WhatsApp</a>
           {% if user.is_authenticated %}
           <a href="/trip/{{trip.id}}/edit" class="btn btn-danger">Изменить</a>
           {% endif %}

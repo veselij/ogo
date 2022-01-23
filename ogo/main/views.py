@@ -35,7 +35,7 @@ class TripListView(CountryMixin, ListView):
         """ Overrode method to filter by country name if search_query provided in request """
         search_query = self.request.GET.get('search_query')
         if search_query:
-            return Trip.objects.filter(resort__country__country=search_query)
+            return Trip.objects.filter(resort__country__country=search_query)[:10]
         else:
             return Trip.objects.all()
 
