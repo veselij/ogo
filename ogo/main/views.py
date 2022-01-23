@@ -37,7 +37,7 @@ class TripListView(CountryMixin, ListView):
         if search_query:
             return Trip.objects.filter(resort__country__country=search_query)[:10]
         else:
-            return Trip.objects.all()
+            return []
 
 
 class TripDetailView(CountryMixin, DetailView):
