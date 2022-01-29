@@ -39,6 +39,10 @@ class Customer(models.Model):
 
 class Country(models.Model):
     """ Model for trip country field. """
+
+    class Meta:
+        ordering = ('country', )
+
     country = models.CharField(max_length=100, help_text='Страна путешествия')
 
     def __str__(self):
