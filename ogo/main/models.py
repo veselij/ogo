@@ -97,7 +97,7 @@ class Trip(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(f'{self.name}{self.start_date}')
         return super().save(*args, **kwargs)
 
 def trip_path(instance, filename):
