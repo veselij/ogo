@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from main.models import Trip, Country, Seller
 from main.forms import TripForm, ImageFormset
+from django.db.models import Max, F
 
 
 class CountryMixin(object):
@@ -37,7 +38,7 @@ class TripListView(CountryMixin, ListView):
         if search_query:
             return Trip.objects.filter(resort__country__country=search_query)[:10]
         else:
-            return []
+            return Trip.objects.annotate(max_date=Max('created')).filter(created=F('max_date'))
 
 
 class TripDetailView(CountryMixin, DetailView):

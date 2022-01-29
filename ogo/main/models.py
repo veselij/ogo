@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
 
+class TopTripManager(models.Manager):
+    """ Trip manager - returns last 50 created trips. """
+    def get_queryset(self):
+        return super().get_queryset().order_by('-created')[:50]
+
+
 class BaseModel(models.Model):
     """ Base model for create and update fields. """
 
@@ -78,6 +84,9 @@ class Trip(BaseModel):
     long = models.FloatField(default=0, null=True, help_text='longitude')
     room_type = models.CharField(max_length=255, default='', help_text='Тип номера')
     slug = models.SlugField(null=False, unique=True)
+
+    objects = models.Manager()
+    top_objects = TopTripManager()
 
     def __str__(self):
         return self.name

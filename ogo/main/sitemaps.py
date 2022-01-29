@@ -16,7 +16,7 @@ class StaticSiteMap(sitemaps.Sitemap):
 
 
 trip_dict = {
-        'queryset': Trip.objects.all(),
+        'queryset': Trip.top_objects.all(),
         'date_field': 'updated',
         }
 

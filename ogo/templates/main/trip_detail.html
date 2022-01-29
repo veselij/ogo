@@ -71,7 +71,7 @@
     <div class="row">
         <div class="col">
       <p style="word-wrap: normal;white-space:pre-line;text-align: justify;">{{ object.description }}</p>
-      <a href="https://wa.me/{{seller.mobile_phone_number }}?text=Меня заинтересовал отель {{object.name}} в {{object.resort}} {{object.resort.country}}" class="btn btn-warning">WhatsApp</a>
+      <a href="https://wa.me/{{ seller.mobile_phone_number }}?text=Привет! Меня заинтересовал отель {{trip.name}} в {{trip.resort.country}} {{trip.resort}}"><i class="fab fa-whatsapp-square fa-5x" style="color: #25D366"></i></a>
           {% if user.is_authenticated %}
               <a href="{{object.get_absolute_url}}edit/" class="btn btn-danger">Изменить</a>
           {% endif %}
