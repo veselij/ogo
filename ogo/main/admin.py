@@ -3,7 +3,7 @@ from main.models import Customer, Country, PurchasedTrip, Trip, Picture, Seller,
 
 
 class TripAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created', 'updated',  'start_date', 'slug')
+    list_display = ('name', 'created', 'updated',  'start_date', 'slug', 'number_of_pictures')
     list_filter = ('resort__country', )
     search_fields = ('name', )
 

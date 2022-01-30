@@ -92,6 +92,10 @@ class Trip(BaseModel):
     objects = models.Manager()
     top_objects = TopTripManager()
 
+    @property
+    def number_of_pictures(self):
+        return self.picture_set.count()
+
     def __str__(self):
         return self.name
 
