@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from main.models import Trip, Country, Seller
 from main.forms import TripForm, ImageFormset
 from django.db.models import Max, F
+from datetime import datetime, timedelta
 
 
 class CountryMixin(object):
@@ -36,9 +37,9 @@ class TripListView(CountryMixin, ListView):
         """ Overrode method to filter by country name if search_query provided in request """
         search_query = self.request.GET.get('search_query')
         if search_query:
-            return Trip.objects.filter(resort__country__country=search_query)[:10]
+            return Trip.objects.filter(resort__country__country=search_query, start_date__gt=datetime.today() + timedelta(10))[:10]
         else:
-            return Trip.objects.annotate(max_date=Max('created')).filter(created=F('max_date'))
+            return Trip.objects.annotate(max_date=Max('created')).filter(created=F('max_date'), start_date__gt=datetime.today() + timedelta(10))
 
 
 class TripDetailView(CountryMixin, DetailView):
